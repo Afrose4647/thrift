@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="product.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 10px;
+        }
+        .button {
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        #clear-cart {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Shopping Cart</h1>
+    <div id="cart-items">
+        <!-- Cart items will be dynamically added here -->
+    </div>
+    <p id="total-price">Total: ₹0.00</p>
+    <button id="clear-cart">Clear Cart</button>
+    <a href="payment.html" class="button">Proceed to Checkout</a>
+    <a href="thriftpage.html" class="button">Continue Shopping</a>
+
+    <script>
+        window.onload = function () {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartItems = document.getElementById("cart-items");
+            const totalPrice = document.getElementById("total-price");
+            let total = 0;
+
+            cartItems.innerHTML = "";
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                let cartItem = `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <span>${item.name} (x${item.quantity})</span>
+                        <span>₹${(item.price * item.quantity).toFixed(2)}</span>
+                        <button onclick="removeItem(${index})">Remove</button>
+                    </div>
+                `;
+                cartItems.innerHTML += cartItem;
+            });
+
+            totalPrice.innerText = `Total: ₹${total.toFixed(2)}`;
+            localStorage.setItem("cart", JSON.stringify(cart));
+        };
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart"));
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            window.location.reload();
+        }
+
+        document.getElementById("clear-cart").onclick = function () {
+            localStorage.removeItem("cart");
+            window.location.reload();
+        };
+    </script>
+</body>
+</html>
