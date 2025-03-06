@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "Al Nassr Home",
+        "images": ["./jersey1.jpeg.jpeg", "./jersey2.jpeg.jpeg", "./jersey3.jpeg.jpeg"],
+        "price": "₹299",
+        "size": ["S", "M", "L", "XL", "2XL"]
+    },
+    {
+        "id": 2,
+        "name": "Real Madrid Home",
+        "images": ["./rm1.jpeg", "./rm2.jpeg", "./rm3.jpeg"],
+        "price": "₹349",
+        "size": ["S", "M", "L", "XL"]
+    }
+]

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        .orders-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .order-item img {
+            width: 80px;
+            border-radius: 10px;
+        }
+        .empty-message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<div class="orders-container">
+    <h2>My Orders</h2>
+    <div id="orders"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+        const ordersContainer = document.getElementById("orders");
+
+        if (orders.length === 0) {
+            ordersContainer.innerHTML = '<p class="empty-message">No orders placed yet!</p>';
+        } else {
+            orders.forEach(order => {
+                const orderItem = document.createElement("div");
+                orderItem.classList.add("order-item");
+                orderItem.innerHTML = `
+                    <img src="${order.image}" alt="${order.name}">
+                    <div>
+                        <h4>${order.name}</h4>
+                        <p>₹${order.price} x ${order.quantity}</p>
+                        <p>Status: Completed</p>
+                    </div>
+                    <div>₹${(order.price * order.quantity).toFixed(2)}</div>
+                `;
+                ordersContainer.appendChild(orderItem);
+            });
+        }
+
+        // Clear orders from localStorage after displaying
+        localStorage.removeItem("orders");
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 50px;
+            background-image: url(bgimage.jpeg.webp);
+        }
+        .checkout-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border:2px solid black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+        }
+        .cart-items {
+            margin: 20px 0;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-item img {
+            width: 80px;
+            border-radius: 10px;
+        }
+        .total {
+            text-align: right;
+            border-top :5px solid green;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .payment-methods {
+            margin-top: 20px;
+        }
+        .payment-methods label {
+            display: block;
+            margin: 10px 0;
+        }
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<div class="checkout-container">
+    <h2>Checkout</h2>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="total" id="cart-total">Total: ₹0</div>
+    <div class="payment-methods">
+        <h3>Select Payment Method:</h3>
+        <label>
+            <input type="radio" name="payment" value="cod" checked> Cash on Delivery
+        </label>
+        <label>
+            <input type="radio" name="payment" value="upi"> UPI Payment (Razorpay)
+        </label>
+    </div>
+    <button class="checkout-btn">Place Order</button>
+    <div id="message"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartItemsContainer = document.getElementById("cart-items");
+        const cartTotal = document.getElementById("cart-total");
+        const message = document.getElementById("message");
+        let total = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = "<p>Your cart is empty!</p>";
+        } else {
+            cart.forEach(item => {
+                const cartItem = document.createElement("div");
+                cartItem.classList.add("cart-item");
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h4>${item.name}</h4>
+                        <p>₹${item.price} x ${item.quantity}</p>
+                    </div>
+                    <div>₹${(item.price * item.quantity).toFixed(2)}</div>
+                `;
+                total += item.price * item.quantity;
+                cartItemsContainer.appendChild(cartItem);
+            });
+            cartTotal.innerText = `Total: ₹${total.toFixed(2)}`;
+        }
+
+        document.querySelector(".checkout-btn").addEventListener("click", () => {
+            const paymentMethod = document.querySelector("input[name='payment']:checked").value;
+
+            if (paymentMethod === "upi") {
+                var options = {
+                    "key": "rzp_test_hx0iKfup5dpdhj",
+                    "amount": total * 100,
+                    "currency": "INR",
+                    "name": "Madz Thriftz",
+                    "description": "Order Payment",
+                    "image": "logow.jpeg",
+                    "handler": function (response) {
+                        message.textContent = "Payment Successful! Payment ID: " + response.razorpay_payment_id;
+                        localStorage.removeItem("cart");
+                        setTimeout(() => window.location.href = "myorders.html", 2000);
+                    },
+                    "theme": {
+                        "color": "#4CAF50"
+                    }
+                };
+                var rzp = new Razorpay(options);
+                rzp.open();
+            } else if (paymentMethod === "cod") {
+                message.textContent = "Order Placed with Cash on Delivery!";
+                localStorage.removeItem("cart");
+                setTimeout(() => window.location.href = "myorders.html", 2000);
+            } else {
+                message.textContent = "Please select a payment method.";
+            }
+        });
+    });
+</script>
+</body>
+</html>

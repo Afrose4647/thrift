@@ -1,0 +1,170 @@
+
+body {
+	background-image: url(bgimage.jpeg.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+.logo{
+    height:20px;
+    width: 20px;
+}
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+        .product-container {
+            margin:40px;
+            margin-left: 300px;
+            margin-right: 300px;
+            display: flex;
+            border: 1px solid black;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 800px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .product-image img {
+            margin: 10px;
+            border: 2px solid black;
+            margin-bottom: 100px;
+            border-radius: 10px;
+            width: 400px;
+            height: 500px;
+        }
+        .product-details {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+        .product-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .product-size, .product-price, .product-info, .product-reviews {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .buy-now-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            transition:  0.3s;
+            width: 90%;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .buy-now-btn:hover {
+            background: #0056b3;
+        }
+        .zoom-animation {
+               transform: scale(1.2);
+               transition: transform 0.3s ease;
+         }
+         .image-gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+        
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.2);
+        }
+        .cart-button {
+            cursor: pointer;
+          
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.25rem;
+          
+            padding: 0.5rem;
+            width: 100%;
+            background-image: var(--bg-linear);
+          
+            font-size: 0.75rem;
+            font-weight: 500;
+            color:blue;
+            text-wrap: nowrap;
+          
+            border: 2px solid hsla(262, 83%, 58%, 0.5);
+            border-radius: 0.5rem;
+            box-shadow: inset 0 0 0.25rem 1px var(--light);
+          }
+          
+          .cart-button .cart-icon {
+            width: 1rem;
+          }
+          .cart-button:hover{ border: 2px solid var(--light);
+          }
+          .cart-message {
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+          }
+          
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          
+          .zoom-animation {
+            transform: scale(1.2);
+            transition: transform 0.3s ease;
+          }
+          
+          
+          
+        
