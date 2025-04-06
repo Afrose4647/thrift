@@ -19,11 +19,31 @@ $products = $conn->query("SELECT * FROM products");
     <!-- Navbar -->
     <?php include 'includes/navbar.php'; ?>
 
-    <!-- Hero Section -->
-    <header class="hero text-center py-5">
-        <h1>Welcome to Madz Thriftz</h1>
-        <p>Best collection of football jerseys, baggy jeans, and jackets</p>
-    </header>
+
+    <!-- Banner Section -->
+
+    <body>
+        <div class="banner-container">
+          <div class="banner-slide">
+            <img src="assets/ban1.webp" alt="Clothing Banner 1">
+          </div>
+          <div class="banner-slide">
+            <img src="assets/ban2.webp" alt="Clothing Banner 2">
+          </div>
+          <div class="banner-slide">
+            <img src="assets/ban3.webp" alt="Clothing Banner 3">
+          </div>
+          <!-- View more slides here -->
+        </div>
+      
+        <!-- Navigation buttons -->
+        <div class="nav-buttons">
+          <button class="prev">&#10094;</button>
+          <button class="next">&#10095;</button>
+        </div>
+      
+        <script src="assets/js/ban.js"></script>
+      </body>
 
     <!-- Product Listing -->
     <div class="container mt-4">
@@ -40,7 +60,11 @@ $products = $conn->query("SELECT * FROM products");
                             <h5 class="card-title"><?= htmlspecialchars($product['name']); ?></h5>
                             <p class="card-text">₹<?= number_format($product['price'], 2); ?></p>
                             <a href="product_details.php?id=<?= $product['id']; ?>" class="btn btn-primary">View</a>
-                            <a href="cart.php?action=add&id=<?= $product['id']; ?>" class="btn btn-success">Add to Cart</a>
+                            <form method="POST" action="cart.php">
+    <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+    <button type="submit" class="btn btn-success">Add to Cart</button>
+</form>
+
                         </div>
                     </div>
                 </div>

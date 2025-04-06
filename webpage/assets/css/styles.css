@@ -20,11 +20,23 @@ body {
 }
 
 .hero {
-    background: url('../images/banner.jpg') no-repeat center center/cover;
+    background: black;  /* Set the background to black */
     height: 300px;
-    color: white;
+    color: white;  /* Change text color to white */
     text-align: center;
     padding: 100px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .hero {
+        height: 250px;  /* Reduce height for smaller screens */
+        padding: 80px 0;
+    }
 }
 
 .container {
@@ -63,3 +75,63 @@ body {
     cursor: pointer;
     margin-top: 10px;
 }
+/* Banner Container */
+.banner-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Banner Wrapper */
+.banner-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 300%; /* To fit all images in a row */
+}
+
+/* Banner Slide */
+.banner-slide {
+    flex: 0 0 100%;
+    text-align: center;
+}
+
+/* Make images responsive */
+.banner-slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Navigation Buttons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.prev:hover, .next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .banner-slide img {
+        border-radius: 5px;
+    }
+    .prev, .next {
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+}
+

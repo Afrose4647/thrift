@@ -18,12 +18,12 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link text-white" href="index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link text-white" href="products/index.php">Shop</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="cart/index.php">Cart</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="orders/index.php">My Orders</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="cart.php">Cart</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="my_orders.php">My Orders</a></li>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <li class="nav-item"><a class="nav-link text-white" href="auth/logout.php">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="logout.php">Logout</a></li>
                 <?php else: ?>
-                    <li class="nav-item"><a class="nav-link text-white" href="auth/login.php">Login</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="login.php">Login</a></li>
                 <?php endif; ?>
             </ul>
         </div>

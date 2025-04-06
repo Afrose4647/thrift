@@ -24,12 +24,16 @@ $products = $conn->query("SELECT * FROM products");
         <?php while ($product = $products->fetch_assoc()): ?>
             <div class="col-md-4">
                 <div class="card mb-3">
-                    <img src="<?= htmlspecialchars($product['image_url']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name']); ?>" onerror="this.onerror=null; this.src='../assets/img/no-image.jpg';">
+                    <img src="<?= htmlspecialchars($product['image']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name']); ?>" onerror="this.onerror=null; this.src='../assets/img/no-image.jpg';">
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($product['name']); ?></h5>
                         <p class="card-text">₹<?= number_format($product['price'], 2); ?></p>
                         <a href="../product_details.php?id=<?= $product['id']; ?>" class="btn btn-primary">View</a>
-                        <a href="../cart.php?action=add&id=<?= $product['id']; ?>" class="btn btn-success">Add to Cart</a>
+                        <form method="POST" action="cart.php">
+    <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+    <button type="submit" class="btn btn-success">Add to Cart</button>
+</form>
+                   
                     </div>
                 </div>
             </div>

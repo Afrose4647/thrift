@@ -9,6 +9,7 @@ include '../db.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $price = $_POST['price'];
+    $description = $_POST['description']; // New description field
 
     // ImgBB API Key
     $imgbb_api_key = "3b7a4c1077c49c890c0e45249a6c870d";  // Replace with your ImgBB API key
@@ -38,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $image_url = $response_data['data']['url']; // Get the ImgBB image URL
 
             // Insert product into MySQL database
-            $stmt = $conn->prepare("INSERT INTO products (name, price, image) VALUES (?, ?, ?)");
-            $stmt->bind_param("sds", $name, $price, $image_url);
+            $stmt = $conn->prepare("INSERT INTO products (name, price, description, image) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("sdss", $name, $price, $description, $image_url);
             if ($stmt->execute()) {
                 echo "<script>alert('Product added successfully!');</script>";
             } else {
@@ -74,6 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="mb-3">
                     <label class="form-label">Price ($)</label>
                     <input type="number" name="price" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-control" rows="3" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Upload Image</label>

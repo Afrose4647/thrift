@@ -37,7 +37,11 @@ if (!$product) {
                 <h2><?= htmlspecialchars($product['name']); ?></h2>
                 <h4>₹<?= number_format($product['price'], 2); ?></h4>
                 <p><?= htmlspecialchars($product['description']); ?></p>
-                <a href="cart.php?action=add&id=<?= $product['id']; ?>" class="btn btn-success">Add to Cart</a>
+                <form method="POST" action="cart.php">
+    <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+    <button type="submit" class="btn btn-success">Add to Cart</button>
+</form>
+
                 <a href="index.php" class="btn btn-secondary">Back to Shop</a>
             </div>
         </div>
